@@ -118,13 +118,6 @@ def extract_relevant_info(query, faq_data):
             matched_info.append(value)
     return " ".join(matched_info) if matched_info else "I’m not sure about that. Could you provide more details or contact support@Adigy.ai?"
 
-def clean_response(text):
-    text = re.sub(r'\n+', ' ', text)
-    text = re.sub(r'\s+', ' ', text)
-    text = re.sub(r'(\b\w+\b)(?=.*\1)', r'\1', text)  # Remove repeated words
-    text = re.sub(r'[*_#`]+', '', text)  # Remove Markdown-like characters
-    return text.strip()
-
 def get_model_response(user_query, conversation_history=[]):
     # Extract relevant FAQ info based on query
     relevant_info = extract_relevant_info(user_query, FAQ_DATA)
@@ -162,7 +155,7 @@ def get_model_response(user_query, conversation_history=[]):
             if isinstance(result, list) and len(result) > 0:
                 generated_text = result[0].get("generated_text", "")
                 print(f"Full generated text: {generated_text}")
-                assistant_response = clean_response(generated_text.split("Assistant:")[-1].strip())
+                assistant_response = generated_text.split("Assistant:")[-1].strip()
                 return assistant_response
             else:
                 return "I apologize, but I encountered an error processing your query. Please try again."
