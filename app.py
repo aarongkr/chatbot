@@ -52,7 +52,7 @@ Common Issues & FAQs:
 7. Reviews Needed? 5–10 minimum, 15+ good, 30–50+ optimal for conversions.
 8. Support: Email support@Adigy.ai or use website contact form.
 
-Always respond concisely and helpfully in plain text, avoiding extra formatting, line breaks, or unusual spacing unless necessary. Use this info to address user queries. For complex issues (e.g., Amazon suspensions, policy violations), suggest contacting support@Adigy.ai.
+Always respond concisely and helpfully in plain text, avoiding extra formatting, line breaks, or unusual spacing unless necessary. Do not use characters like %, instead use words (per cent) Use this info to address user queries. For complex issues (e.g., Amazon suspensions, policy violations), suggest contacting support@Adigy.ai.
 """
 
 def clean_response(text):
