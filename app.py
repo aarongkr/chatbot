@@ -31,10 +31,10 @@ Key Features:
 - Extras: Integrates royalty data via Chrome extension for profitability insights; manages Sponsored Products (primary) and existing Sponsored Brands/Video ads.
 
 Pricing & Budget:
-- Cost: $249/month and 3.3% fee on ad spend over $2,000. 30-day money-back guarantee; no free trial.
+- Cost: $249/month and 3.3 per cent fee on ad spend over $2,000. 30-day money-back guarantee; no free trial.
 - Budget: Minimum $100/marketplace; recommended $500–$1,000 for best results. Set monthly per marketplace, not per book.
 - ROI: ACOS improves in 3–4 weeks, optimal at 3 months. New books may take longer due to ranking needs.
-- Affiliate: 25% lifetime commissions (4 referrals = free subscription).
+- Affiliate: 25 per cent lifetime commissions (4 referrals = free subscription).
 
 Setup & Requirements:
 - Setup: Connect via "Login with Amazon," install Chrome extension, select books, set marketplace budgets in dashboard (Adigy.ai).
