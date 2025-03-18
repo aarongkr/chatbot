@@ -17,12 +17,12 @@ HEADERS = {
 
 MODEL_URL = "https://api-inference.huggingface.co/models/mistralai/Mistral-7B-Instruct-v0.2"
 
-# Updated system prompt
+# Lean system prompt
 SYSTEM_PROMPT = """
-You are AdigyAssist, a helpful and friendly support specialist for Adigy, an automated Amazon ads management software for KDP publishers. Use the provided information to answer user queries concisely and accurately in plaintext, using formatting like bullet points or numbered lists only when necessary to improve readability. Do not repeat the query, conversation history, or any part of the input structure in your response—provide only the answer. If the info is insufficient, say "I’m not sure about that" and suggest contacting support@Adigy.ai for complex issues if necessary (e.g., Amazon suspensions, policy violations).
+You are AdigyAssist, a helpful and friendly support specialist for Adigy, an automated Amazon ads management software for KDP publishers. Use the provided information to answer user queries concisely and accurately in plaintext, using formatting to present the informating in an easily readable way. If the info is insufficient, say "I’m not sure about that" and suggest contacting support@Adigy.ai for complex issues if necessary (e.g., Amazon suspensions, policy violations).
 """
 
-# Full FAQ data (unchanged)
+# Full FAQ data
 FAQ_DATA = {
     "what is adigy": "Adigy (formerly Adsology) is an automated Amazon ads management software for KDP publishers, optimizing campaigns to improve performance and returns, ideal for lower ad spend or beginner publishers.",
     "difference between adigy and adsdroid": "Adigy is a self-service tool for lower ad spend or beginners. AdsDroid is a premium 'done-for-you' service with a dedicated account manager for advanced publishers with higher ad spend.",
@@ -118,17 +118,8 @@ def extract_relevant_info(query, faq_data):
             matched_info.append(value)
     return " ".join(matched_info) if matched_info else "I’m not sure about that. Could you provide more details or contact support@Adigy.ai?"
 
-def clean_response(text):
-    import re
-    text = re.sub(r'.*Assistant:', '', text, flags=re.DOTALL)  # Remove everything before last Assistant:
-    text = re.sub(r'Below is the relevant information.*?:\n', '', text, flags=re.DOTALL)
-    text = re.sub(r'Conversation History.*?:\n', '', text, flags=re.DOTALL)
-    text = re.sub(r'Latest User Query.*?:\n', '', text, flags=re.DOTALL)
-    text = re.sub(r'\n+', ' ', text)
-    text = re.sub(r'\s+', ' ', text)
-    return text.strip()
-
 def get_model_response(user_query, conversation_history=[]):
+    # Extract relevant FAQ info based on query
     relevant_info = extract_relevant_info(user_query, FAQ_DATA)
     
     formatted_conversation = (
@@ -164,7 +155,7 @@ def get_model_response(user_query, conversation_history=[]):
             if isinstance(result, list) and len(result) > 0:
                 generated_text = result[0].get("generated_text", "")
                 print(f"Full generated text: {generated_text}")
-                assistant_response = clean_response(generated_text)
+                assistant_response = generated_text.split("Assistant:")[-1].strip()
                 return assistant_response
             else:
                 return "I apologize, but I encountered an error processing your query. Please try again."
