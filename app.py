@@ -215,7 +215,7 @@ def send_support_email(user_query, conversation_history):
 
     # Brevo API payload
     payload = {
-        "sender": {"name": "AdigyAssist User", "email": "support@Adigy.ai"},  # Must be a verified sender in Brevo
+        "sender": {"name": "AdigyAssist User", "email": "aaronmichaelrazey@gmail.com"},  # Must be a verified sender in Brevo
         "to": [{"email": "aaronmichaelrazey@gmail.com", "name": "Adigy Support"}],
         "subject": "Support Request from AdigyAssist User",
         "textContent": email_body
