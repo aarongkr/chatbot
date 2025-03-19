@@ -138,7 +138,6 @@ def clean_response(text):
     text = re.sub(r'Below is the relevant information.*?:\n', '', text, flags=re.DOTALL)
     text = re.sub(r'Conversation History.*?:\n', '', text, flags=re.DOTALL)
     text = re.sub(r'Latest User Query.*?:\n', '', text, flags=re.DOTALL)
-    text = text.replace("1.", "-").replace("2.", "-")  # Basic Markdown bullets
     return text.strip()
 
 @lru_cache(maxsize=100)
