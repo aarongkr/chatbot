@@ -225,7 +225,7 @@ def send_support_email(user_query, conversation_history, user_email):
 
     # Brevo API payload
     payload = {
-        "sender": {"name": "AdigyAssist User", "email": user_email or "aaronmichaelrazey@gmail.com"},  # Use user email if provided, else fallback
+        "sender": {"name": "AdigyAssist User", "email": "aaronmichaelrazey@gmail.com"},  # Use user email if provided, else fallback
         "to": [{"email": "aaronmichaelrazey@gmail.com", "name": "Adigy Support"}],
         "subject": "Support Request from AdigyAssist User",
         "textContent": email_body
