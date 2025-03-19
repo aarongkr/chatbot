@@ -23,7 +23,8 @@ try:
     with open("faq_data.json", "r") as f:
         FAQ_DATA = json.load(f)
 except FileNotFoundError:
-    FAQ_DATA = {"what is adigy": "Adigy (formerly Adsology) is an automated Amazon ads management software designed for Kindle Direct Publishing (KDP) publishers—those who self-publish books on Amazon. It optimizes Amazon advertising campaigns to improve performance and returns by adjusting bids, targeting, and budgets, making it especially useful for publishers with lower ad spend (e.g., under $2,000/month) or beginners new to Amazon ads.",
+    FAQ_DATA = {
+    "what is adigy": "Adigy (formerly Adsology) is an automated Amazon ads management software designed for Kindle Direct Publishing (KDP) publishers—those who self-publish books on Amazon. It optimizes Amazon advertising campaigns to improve performance and returns by adjusting bids, targeting, and budgets, making it especially useful for publishers with lower ad spend (e.g., under $2,000/month) or beginners new to Amazon ads.",
     "difference between adigy and adsdroid": "Adigy is a self-service software tool for publishers with lower ad spend or beginners, automating campaign management. AdsDroid is a premium 'done-for-you' agency service for advanced publishers with higher ad spend (e.g., over $5,000/month), providing a dedicated account manager for personalized monitoring and customization, offering more hands-on support than Adigy’s automated platform.",
     "why transition to adigy": "Adsology is rebranding to Adigy to reflect platform evolution and service enhancements. Your account functionality (e.g., campaign settings, budgets) remains identical; only the name changes to Adigy, aligning with our growth strategy.",
     "fiction or non-fiction": "Adigy supports both fiction and non-fiction books with tailored strategies. Fiction benefits from category and product targeting (e.g., ads on similar books), while non-fiction excels with keyword-focused campaigns (e.g., targeting search terms), adapting to each genre’s advertising strengths.",
@@ -198,32 +199,6 @@ def get_model_response(user_query, conversation_history=[]):
         except Exception as e:
             return f"Unexpected error: {str(e)}. Please try again or contact support@Adigy.ai."
 
-# Function to generate typing effect HTML/JavaScript
-def create_typing_effect(text, element_id):
-    # Escape special characters for safe JavaScript injection
-    text = text.replace("'", "\\'").replace("\n", " ")
-    html = f"""
-    <div id="{element_id}"></div>
-    <script>
-    function typeWriter_{element_id}() {{
-        const text = '{text}';
-        let i = 0;
-        const speed = 30; // Milliseconds per character
-        const element = document.getElementById('{element_id}');
-        function type() {{
-            if (i < text.length) {{
-                element.innerHTML += text.charAt(i);
-                i++;
-                setTimeout(type, speed);
-            }}
-        }}
-        type();
-    }}
-    typeWriter_{element_id}();
-    </script>
-    """
-    return html
-
 # Streamlit UI
 st.set_page_config(page_title="Adigy Customer Support", page_icon="📈", layout="centered")
 st.title("📈 Adigy Customer Support")
@@ -232,12 +207,10 @@ st.write("Welcome to Adigy customer support! How can I assist you with your Amaz
 if "messages" not in st.session_state:
     st.session_state.messages = []
 
-for idx, message in enumerate(st.session_state.messages):
+for message in st.session_state.messages:
     with st.chat_message(message["role"]):
         if message["role"] == "assistant":
-            # Use unique ID for each message to avoid JavaScript conflicts
-            element_id = f"typing_{idx}"
-            st.markdown(create_typing_effect(message["content"], element_id), unsafe_allow_html=True)
+            st.markdown(message["content"])
         else:
             st.write(message["content"])
 
@@ -249,9 +222,7 @@ if prompt := st.chat_input("Ask about Adigy..."):
         with st.chat_message("assistant"):
             with st.spinner("Thinking..."):
                 response = get_cached_response(prompt)
-                # Use a unique ID for the new message
-                element_id = f"typing_{len(st.session_state.messages)}"
-                st.markdown(create_typing_effect(response, element_id), unsafe_allow_html=True)
+                st.markdown(response)
         st.session_state.messages.append({"role": "assistant", "content": response})
     else:
         st.warning("Please enter a question!")
