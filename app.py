@@ -200,13 +200,14 @@ def get_model_response(user_query, conversation_history=[]):
         except Exception as e:
             return f"Unexpected error: {str(e)}. Please try again or contact support@Adigy.ai."
 
-def send_support_email(user_query, conversation_history):
+def send_support_email(user_query, conversation_history, user_email):
     if not BREVO_API_KEY:
         logger.error("Brevo API key not configured")
         return "Error: Brevo API key not configured. Please contact an administrator."
 
     # Build email content
     email_body = "Subject: Support Request from AdigyAssist User\n\n"
+    email_body += f"User Email: {user_email or 'Not provided'}\n\n"
     email_body += f"Latest Question:\n{user_query}\n\n"
     
     # Include the chatbot's last answer (latest assistant response)
@@ -220,10 +221,11 @@ def send_support_email(user_query, conversation_history):
             email_body += f"{message['role'].capitalize()}: {message['content']}\n"
     else:
         email_body += "No prior conversation history available.\n"
+    email_body += "\nPlease attempt to reach out to this user promptly at the provided email address."
 
     # Brevo API payload
     payload = {
-        "sender": {"name": "AdigyAssist User", "email": "aaronmichaelrazey@gmail.com"},
+        "sender": {"name": "AdigyAssist User", "email": user_email or "aaronmichaelrazey@gmail.com"},  # Use user email if provided, else fallback
         "to": [{"email": "aaronmichaelrazey@gmail.com", "name": "Adigy Support"}],
         "subject": "Support Request from AdigyAssist User",
         "textContent": email_body
@@ -248,9 +250,18 @@ st.set_page_config(page_title="Adigy Customer Support", page_icon="📈", layout
 st.title("📈 Adigy Customer Support")
 st.write("Welcome to Adigy customer support! How can I assist you with your Amazon ads today?")
 
+# Initialize session state
 if "messages" not in st.session_state:
     st.session_state.messages = []
+if "user_email" not in st.session_state:
+    st.session_state.user_email = ""
 
+# Email input field
+user_email = st.text_input("Enter your email (optional, for support follow-up):", value=st.session_state.user_email)
+if user_email != st.session_state.user_email:
+    st.session_state.user_email = user_email
+
+# Display chat messages
 for idx, message in enumerate(st.session_state.messages):
     with st.chat_message(message["role"]):
         if message["role"] == "assistant":
@@ -259,7 +270,7 @@ for idx, message in enumerate(st.session_state.messages):
             if idx == len(st.session_state.messages) - 1 and len(st.session_state.messages) > 1:
                 if st.button("Contact Support with this Question", key=f"support_{idx}"):
                     user_query = st.session_state.messages[-2]["content"]  # Last user question
-                    result = send_support_email(user_query, st.session_state.messages)
+                    result = send_support_email(user_query, st.session_state.messages, st.session_state.user_email)
                     if "success" in result.lower():
                         st.success(result)
                     else:
@@ -267,6 +278,7 @@ for idx, message in enumerate(st.session_state.messages):
         else:
             st.write(message["content"])
 
+# Chat input
 if prompt := st.chat_input("Ask about Adigy..."):
     if prompt.strip():
         st.session_state.messages.append({"role": "user", "content": prompt})
@@ -278,7 +290,7 @@ if prompt := st.chat_input("Ask about Adigy..."):
                 st.markdown(response)
             # Use a unique key for the new message button
             if st.button("Contact Support with this Question", key=f"support_new_{len(st.session_state.messages)}"):
-                result = send_support_email(prompt, st.session_state.messages)
+                result = send_support_email(prompt, st.session_state.messages, st.session_state.user_email)
                 if "success" in result.lower():
                     st.success(result)
                 else:
@@ -287,6 +299,7 @@ if prompt := st.chat_input("Ask about Adigy..."):
     else:
         st.warning("Please enter a question!")
 
+# Custom CSS
 st.markdown("""
 <style>
 body { background-color: #1e1e1e; color: #ffffff; }
