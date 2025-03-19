@@ -217,7 +217,7 @@ def send_support_email(user_query, conversation_history, user_email):
     # Include prior conversation history (up to 5 messages before the latest question)
     email_body += "Conversation History (Last 5 Messages Before Latest Question):\n"
     if len(conversation_history) > 1:
-        for message in conversation_history[:-1][-5:]:  # Exclude the latest assistant message, take last 5
+        for message in conversation_history[:-2][-5:]:  # Exclude the latest assistant message, take last 5
             email_body += f"{message['role'].capitalize()}: {message['content']}\n"
     else:
         email_body += "No prior conversation history available.\n"
