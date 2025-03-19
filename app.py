@@ -21,12 +21,16 @@ HUGGINGFACE_HEADERS = {"Authorization": f"Bearer {HUGGINGFACE_API_KEY}", "Conten
 BREVO_URL = "https://api.brevo.com/v3/smtp/email"
 BREVO_HEADERS = {"api-key": BREVO_API_KEY, "Content-Type": "application/json"}
 
+# Debug: Check if keys are loaded
+logger.info(f"HuggingFace API Key loaded: {'Yes' if HUGGINGFACE_API_KEY else 'No'}")
+logger.info(f"Brevo API Key loaded: {'Yes' if BREVO_API_KEY else 'No'}")
+
 # Load FAQ from file (save FAQ_DATA as faq_data.json first)
 try:
     with open("faq_data.json", "r") as f:
         FAQ_DATA = json.load(f)
 except FileNotFoundError:
-    FAQ_DATA = {"what is adigy": "Adigy (formerly Adsology) is an automated Amazon ads management software designed for Kindle Direct Publishing (KDP) publishers—those who self-publish books on Amazon. It optimizes Amazon advertising campaigns to improve performance and returns by adjusting bids, targeting, and budgets, making it especially useful for publishers with lower ad spend (e.g., under $2,000/month) or beginners new to Amazon ads.",
+    FAQ_DATA =     {"what is adigy": "Adigy (formerly Adsology) is an automated Amazon ads management software designed for Kindle Direct Publishing (KDP) publishers—those who self-publish books on Amazon. It optimizes Amazon advertising campaigns to improve performance and returns by adjusting bids, targeting, and budgets, making it especially useful for publishers with lower ad spend (e.g., under $2,000/month) or beginners new to Amazon ads.",
     "difference between adigy and adsdroid": "Adigy is a self-service software tool for publishers with lower ad spend or beginners, automating campaign management. AdsDroid is a premium 'done-for-you' agency service for advanced publishers with higher ad spend (e.g., over $5,000/month), providing a dedicated account manager for personalized monitoring and customization, offering more hands-on support than Adigy’s automated platform.",
     "why transition to adigy": "Adsology is rebranding to Adigy to reflect platform evolution and service enhancements. Your account functionality (e.g., campaign settings, budgets) remains identical; only the name changes to Adigy, aligning with our growth strategy.",
     "fiction or non-fiction": "Adigy supports both fiction and non-fiction books with tailored strategies. Fiction benefits from category and product targeting (e.g., ads on similar books), while non-fiction excels with keyword-focused campaigns (e.g., targeting search terms), adapting to each genre’s advertising strengths.",
@@ -201,10 +205,11 @@ def get_model_response(user_query, conversation_history=[]):
 
 def send_support_email(user_query, conversation_history):
     if not BREVO_API_KEY:
+        logger.error("Brevo API key not configured")
         return "Error: Brevo API key not configured. Please contact an administrator."
 
     # Build email content
-    email_body = f"Subject: Support Request from AdigyAssist User\n\n"
+    email_body = "Subject: Support Request from AdigyAssist User\n\n"
     email_body += f"Latest Question:\n{user_query}\n\n"
     email_body += "Conversation History (Last 5 Messages):\n"
     if conversation_history:
@@ -215,20 +220,22 @@ def send_support_email(user_query, conversation_history):
 
     # Brevo API payload
     payload = {
-        "sender": {"name": "AdigyAssist User", "email": "aaronmichaelrazey@gmail.com"},  # Must be a verified sender in Brevo
+        "sender": {"name": "AdigyAssist User", "email": "aaronmichaelrazey@gmail.com"},  # Replace with your verified sender email if different
         "to": [{"email": "aaronmichaelrazey@gmail.com", "name": "Adigy Support"}],
         "subject": "Support Request from AdigyAssist User",
         "textContent": email_body
     }
 
+    logger.info(f"Sending email with payload: {json.dumps(payload, indent=2)}")
     try:
         response = requests.post(BREVO_URL, headers=BREVO_HEADERS, json=payload)
         response.raise_for_status()
         logger.info(f"Email sent successfully: {response.status_code}")
         return "Email sent successfully to support@Adigy.ai!"
     except requests.HTTPError as e:
-        logger.error(f"Failed to send email: {e.response.status_code} - {e.response.text}")
-        return f"Failed to send email: API error (Status {e.response.status_code}). Please try again later."
+        error_detail = e.response.text if e.response else "No response detail"
+        logger.error(f"Failed to send email: {e.response.status_code} - {error_detail}")
+        return f"Failed to send email: API error (Status {e.response.status_code}). Details: {error_detail}. Please try again later."
     except Exception as e:
         logger.error(f"Unexpected error sending email: {str(e)}")
         return f"Unexpected error sending email: {str(e)}. Please try again later."
@@ -241,16 +248,19 @@ st.write("Welcome to Adigy customer support! How can I assist you with your Amaz
 if "messages" not in st.session_state:
     st.session_state.messages = []
 
-for message in st.session_state.messages:
+for idx, message in enumerate(st.session_state.messages):
     with st.chat_message(message["role"]):
         if message["role"] == "assistant":
             st.markdown(message["content"])
             # Add support button only for the latest assistant message
-            if message == st.session_state.messages[-1] and len(st.session_state.messages) > 1:
-                if st.button("Contact Support with this Question", key=f"support_{len(st.session_state.messages)}"):
+            if idx == len(st.session_state.messages) - 1 and len(st.session_state.messages) > 1:
+                if st.button("Contact Support with this Question", key=f"support_{idx}"):
                     user_query = st.session_state.messages[-2]["content"]  # Last user question
                     result = send_support_email(user_query, st.session_state.messages[:-1])
-                    st.success(result) if "success" in result.lower() else st.error(result)
+                    if "success" in result.lower():
+                        st.success(result)
+                    else:
+                        st.error(result)
         else:
             st.write(message["content"])
 
@@ -263,9 +273,13 @@ if prompt := st.chat_input("Ask about Adigy..."):
             with st.spinner("Thinking..."):
                 response = get_cached_response(prompt)
                 st.markdown(response)
+            # Use a unique key for the new message button
             if st.button("Contact Support with this Question", key=f"support_new_{len(st.session_state.messages)}"):
                 result = send_support_email(prompt, st.session_state.messages[:-1])
-                st.success(result) if "success" in result.lower() else st.error(result)
+                if "success" in result.lower():
+                    st.success(result)
+                else:
+                    st.error(result)
         st.session_state.messages.append({"role": "assistant", "content": response})
     else:
         st.warning("Please enter a question!")
