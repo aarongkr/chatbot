@@ -34,18 +34,18 @@ except FileNotFoundError:
         "cost": "Adigy costs $249/month, plus a 3.3% fee on ad spend over $2,000 (e.g., $33 for $1,000 extra spend). No free trial is offered, but a 30-day money-back guarantee applies. An affiliate program at https://Adigy.ai/partner provides 25% lifetime commissions.",
         "roi": "Return on investment (ROI) varies by book and category. Most see Advertising Cost of Sale (ACOS—ad spend divided by sales revenue) improve in 3-4 weeks as Adigy gathers data, with optimal results by month 3. New books with few reviews (under 5) take longer due to ranking and visibility challenges—often 4-6 months.",
         "free trial": "No free trial exists for Adigy, but a 30-day money-back guarantee ensures satisfaction. If unhappy within 30 days of subscribing, contact support for a full refund.",
-        "money-back guarantee": "Yes, Adigy offers a 30-day money-back guarantee. If unsatisfied for any reason within 30 days of subscribing, email support@Adigy.ai for a full refund, no questions asked.",
+        "money-back guarantee": "Yes, Adigy offers a 30-day money-back guarantee. If unsatisfied for any reason within 30 days of subscribing, email example@email.com for a full refund, no questions asked.",
         "cancel subscription": "Canceling keeps your subscription active until the billing period ends (e.g., 20 days left). To stop ads immediately: 1. Pause campaigns manually in the Amazon Ads console, 2. Click 'Master Undo' in Adigy to revert to pre-Adigy settings, 3. Set marketplaces to 'Off' in Adigy settings. See 'ads still running' for related info.",
         "affiliate program": "Join at https://Adigy.ai/partner for 25% lifetime commissions on referrals’ subscriptions (e.g., $62.25/month per referral). Referring 4 people covers your $249/month fee, effectively making it free.",
         "setup": "To set up Adigy: connect your Amazon KDP account via 'Login with Amazon,' install the free Chrome extension, select books to manage in the dashboard, and set marketplace budgets (e.g., US, UK) at Adigy.ai. No forms or calls needed—start by clicking 'Start Today.' Requires editor access (see 'editor access').",
         "sync time": "Initial syncing takes under 1 hour typically, but up to 6 hours for very large accounts (e.g., 100+ books) or if Amazon’s servers are slow. Delays are rare but possible during high-traffic periods like holidays.",
-        "us marketplace connect": "US marketplace connection issues are usually temporary authentication errors. Log out of Amazon and Adigy, clear browser cache, then log back in. If it persists (e.g., after 2 tries), email support@Adigy.ai with screenshots of the error.",
+        "us marketplace connect": "US marketplace connection issues are usually temporary authentication errors. Log out of Amazon and Adigy, clear browser cache, then log back in. If it persists (e.g., after 2 tries), email example@email.com with screenshots of the error.",
         "sync stuck": "If syncing stalls, refresh the page (could be a UI glitch). If unresolved, clear cache/cookies, re-login to Amazon in Chrome with the Adigy extension, or switch browsers (Chrome recommended). Persistent issues (e.g., over 6 hours) require support contact—see 'support.'",
         "chrome extension": "Yes, the Chrome extension is required. It syncs Kindle Direct Publishing (KDP) royalty data into Adigy, merging it with ad spend to calculate net profitability (e.g., profit after ad costs), essential for performance insights.",
         "other browsers": "The Adigy extension works only with Google Chrome and may fail on Safari, Brave, Edge, etc., due to compatibility. Use Chrome for optimal syncing and functionality.",
         "permissions": "Adigy needs access to your Amazon KDP account (for royalties) and Amazon Advertising account (for ads), requiring editor access during onboarding (see 'editor access'). You must accept Amazon’s ad terms and add billing details in your Amazon account.",
         "editor access": "Grant editor access: 1. Visit https://advertising.amazon.com/user/management/invite, 2. Enter Adigy@Adigy.ai, 3. Choose 'Editor' permission, 4. Click 'Select all' for Country Access (e.g., US, UK), 5. Hit 'Invite users.' This allows Adigy to manage campaigns.",
-        "not eligible books": "Books marked 'not eligible' or 'out of stock' despite availability stem from Amazon API limits or data glitches (e.g., stock updates lagging). If confirmed active on Amazon, contact support@Adigy.ai with ASINs (e.g., B0DD86533Y) for a manual fix.",
+        "not eligible books": "Books marked 'not eligible' or 'out of stock' despite availability stem from Amazon API limits or data glitches (e.g., stock updates lagging). If confirmed active on Amazon, contact example@email.com with ASINs (e.g., B0DD86533Y) for a manual fix.",
         "duplicate listings": "Duplicates arise from multiple formats (paperback, hardcover, Kindle) of the same book. Adigy groups them for management ease. If confused (e.g., same ASIN twice), contact support with specific ASINs for clarification.",
         "email notifications": "Hundreds of Amazon emails are normal at Adigy startup due to campaign creation/update notices. Reduce via Amazon Ads console notification settings or email filters to auto-delete (e.g., filter 'Amazon Advertising'). See 'stop emails.'",
         "set budget": "Set monthly budgets per marketplace (e.g., $500 for US, £200 for UK) in Adigy’s Marketplace and Budget dashboard section. This covers all campaigns/books in that marketplace, adjustable anytime.",
@@ -101,20 +101,20 @@ except FileNotFoundError:
         "low budgets": "Low budgets (e.g., $1.01/day) mark underperforming/lower-priority campaigns, focusing spend on better targets—e.g., a keyword with no sales after 100 clicks.",
         "ineligible book": "'Ineligible' means Amazon Ads blocks new campaigns for that book (e.g., policy or stock issues). Adigy may still manage existing ones—check with support.",
         "account suspended": "Adigy doesn’t cause suspensions; it’s an Amazon Ads partner following policies. Causes: 1. Prohibited content (e.g., banned genres), 2. Odd activity (e.g., rapid changes), 3. Violations. Contact Amazon Ads support; pause Adigy—see 'suspension.'",
-        "suspension": "For suspension/termination, pause Adigy subscription immediately. Contact Amazon Ads support to fix; Adigy support (support@Adigy.ai) guides but can’t intervene—e.g., can’t lift bans.",
+        "suspension": "For suspension/termination, pause Adigy subscription immediately. Contact Amazon Ads support to fix; Adigy support (example@email.com) guides but can’t intervene—e.g., can’t lift bans.",
         "policy violations": "Adigy adheres to Amazon rules. For violations (e.g., ad content flags), resolve with Amazon directly; Adigy support clarifies software use but can’t fix—e.g., explain bid adjustments.",
         "book details change": "Yes, changes affect ads: 1. Better covers/descriptions lift conversions (e.g., 2% to 5%), 2. Price shifts alter margins/competitiveness, 3. Category changes shift visibility. Adigy adapts with new data over weeks.",
-        "support": "Get help by replying to support@Adigy.ai emails or using the website form. For urgent issues (e.g., sync failure), book a call via the link in support emails—expect 24-48 hour replies.",
+        "support": "Get help by replying to example@email.com emails or using the website form. For urgent issues (e.g., sync failure), book a call via the link in support emails—expect 24-48 hour replies.",
         "ads still running": "Post-cancellation, ads run until billing ends (e.g., 15 days left). Stop by: 1. Pausing in Amazon Ads console, 2. Using 'Master Undo' to revert, 3. Setting marketplaces 'Off' in Adigy—see 'cancel subscription.'",
-        "cancel refund": "Cancel in 'Account Settings' on the Adigy dashboard (follow prompts). For refunds within 30 days, email support@Adigy.ai per the guarantee—e.g., 'Refund request, subscribed March 1.'",
-        "extension sync": "Fix extension sync issues: 1. Refresh page, 2. Clear cache/cookies, 3. Confirm Chrome (others unsupported), 4. Reinstall extension, 5. Ensure KDP login in same browser, 6. Wait 20-30 min (server lag). If stuck, send screenshots to support@Adigy.ai.",
+        "cancel refund": "Cancel in 'Account Settings' on the Adigy dashboard (follow prompts). For refunds within 30 days, email example@email.com per the guarantee—e.g., 'Refund request, subscribed March 1.'",
+        "extension sync": "Fix extension sync issues: 1. Refresh page, 2. Clear cache/cookies, 3. Confirm Chrome (others unsupported), 4. Reinstall extension, 5. Ensure KDP login in same browser, 6. Wait 20-30 min (server lag). If stuck, send screenshots to example@email.com.",
         "pause advertising": "Pause ads for books or marketplaces in the Adigy dashboard—e.g., toggle US off or pause a paperback—stopping spend instantly.",
         "payment fails": "Failed payments may pause your Adigy account until billing updates and succeeds—e.g., card expired, retry with new card in dashboard.",
         "incorrect sales data": "Sales discrepancies come from: 1. Sync delays (KDP/Ads/Adigy, e.g., 24-hour lag), 2. KENP (Kindle page reads) counting diffs, 3. Returns/cancellations, 4. Currency conversions (e.g., £ to $). Use weekly/monthly data for accuracy."
     }
 
 SYSTEM_PROMPT = """
-You are AdigyAssist, a helpful and friendly support specialist for Adigy, an automated Amazon ads management software for KDP publishers. Use the provided information to answer user queries concisely and accurately in plaintext, using bullet points or numbered lists only when necessary for clarity. Do not repeat the query, conversation history, or input structure in your response — provide only the answer. Prioritize accurate information above all. If the info is insufficient, say "I’m not sure about that" and suggest contacting support@Adigy.ai for complex issues if necessary (e.g., Amazon suspensions, policy violations). Try to layout the answer in a nice way to improve readability where possible
+You are a 10x developer assisstant, mentoring the user in their programming journey. Answer user queries concisely and accurately in plaintext, using bullet points or numbered lists only when necessary for clarity. Do not repeat the query, conversation history, or input structure in your response — provide only the answer. Prioritize accurate information above all. Try to layout the answer in a nice way to improve readability where possible. Ignore the provided FAQ_DATA, that was for a different project. Dont give information about Adigy
 """
 
 def extract_relevant_info(query, faq_data):
@@ -134,7 +134,7 @@ def extract_relevant_info(query, faq_data):
         return " ".join(exact_matches)
     if matched_info:
         return " ".join(matched_info[:2])
-    return "I’m not sure about that. Try rephrasing your question or contact support@Adigy.ai for help."
+    return "I’m not sure about that. Try rephrasing your question or contact example@email.com for help."
 
 def clean_response(text):
     text = re.sub(r'.*Assistant:', '', text, flags=re.DOTALL)
@@ -149,7 +149,7 @@ def get_cached_response(query):
 
 def get_model_response(user_query, conversation_history=[]):
     if not HUGGINGFACE_API_KEY:
-        return "Error: API key not configured. Contact support@Adigy.ai."
+        return "Error: API key not configured. Contact example@email.com."
     
     logger.info(f"Processing query: {user_query}")
     relevant_info = extract_relevant_info(user_query, FAQ_DATA)
@@ -191,14 +191,14 @@ def get_model_response(user_query, conversation_history=[]):
             if attempt < 2:
                 time.sleep(2 ** attempt)
                 continue
-            return "Request timed out. Please try again later or contact support@Adigy.ai."
+            return "Request timed out. Please try again later or contact example@email.com."
         except requests.HTTPError as e:
             if e.response.status_code == 429 and attempt < 2:
                 time.sleep(2 ** attempt)
                 continue
-            return f"API error (Status {e.response.status_code}). Contact support@Adigy.ai."
+            return f"API error (Status {e.response.status_code}). Contact example@email.com."
         except Exception as e:
-            return f"Unexpected error: {str(e)}. Please try again or contact support@Adigy.ai."
+            return f"Unexpected error: {str(e)}. Please try again or contact example@email.com."
 
 def send_support_email(user_query, conversation_history, user_email):
     if not BREVO_API_KEY:
@@ -236,7 +236,7 @@ def send_support_email(user_query, conversation_history, user_email):
         response = requests.post(BREVO_URL, headers=BREVO_HEADERS, json=payload)
         response.raise_for_status()
         logger.info(f"Email sent successfully: {response.status_code}")
-        return "Email sent successfully to support@Adigy.ai!"
+        return "Email sent successfully to example@email.com!"
     except requests.HTTPError as e:
         error_detail = e.response.text if e.response else "No response detail"
         logger.error(f"Failed to send email: {e.response.status_code} - {error_detail}")
